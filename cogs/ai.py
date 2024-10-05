@@ -43,6 +43,7 @@ class AIChatCog(commands.Cog):
                 {
                     "role": "system",
                     "content": content,
+                }
             )
         except Exception as e:
             await message.edit(str(e))
