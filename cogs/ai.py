@@ -8,5 +8,21 @@ class AIChatCog(commands.Cog):
         self.client = AsyncOpenAI(base_url="https://api.voids.top/v1")
         
     @commands.command()
-    async def aichat(ctx: commands.Context):
-        pass
+    async def aichat(ctx: commands.Context, prompt: str):
+        message = await ctx.reply("生成中")
+        chat_completion = await client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
+            model="gemini-1.5-pro-exp-0827",
+            stream=True,
+        )
+        async for chunk in stream:
+            await message.edit(chunk.choices[0].delta.content or "")
+            
+async def setup(bot: commands.Bot):
+    await bot.add_cog(AIChatCog(bot))
+        
