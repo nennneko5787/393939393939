@@ -1,3 +1,5 @@
+import asyncio
+
 import discord
 from discord.ext import commands
 from openai import AsyncOpenAI
@@ -21,7 +23,12 @@ class AIChatCog(commands.Cog):
             stream=True,
         )
         async for chunk in stream:
-            message = await message.edit(message.content + chunk.choices[0].delta.content or "生成中")
+            try:
+                content = content + chunk.choices[0].delta.content or ""
+                message = await message.edit(content)
+            except:
+                pass
+            await asyncio.sleep(0.3)
             
 async def setup(bot: commands.Bot):
     await bot.add_cog(AIChatCog(bot))
