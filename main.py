@@ -8,6 +8,9 @@ dotenv.load_dotenv()
 
 bot = commands.Bot(command_prefix=["39love#", "lenlove#", "h.yummy#"])
 
+@bot.event
+async def setup_hook():
+    await bot.load_extension("cogs.ai")
 
 @bot.command()
 async def ping(ctx: commands.Context):
