@@ -10,7 +10,7 @@ class AIChatCog(commands.Cog):
     @commands.command()
     async def aichat(self, ctx: commands.Context, prompt: str):
         message = await ctx.reply("生成中")
-        chat_completion = await client.chat.completions.create(
+        chat_completion = await self.client.chat.completions.create(
             messages=[
                 {
                     "role": "user",
