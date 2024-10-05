@@ -23,9 +23,10 @@ class AIChatCog(commands.Cog):
                 model="gemini-1.5-pro-exp-0827",
                 stream=True,
             )
+            content = ""
             async for chunk in stream:
                 try:
-                    content = content + chunk.choices[0].delta.content or ""
+                    content = content + (chunk.choices[0].delta.content or "")
                     message = await message.edit(content)
                 except:
                     pass
