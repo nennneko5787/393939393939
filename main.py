@@ -6,7 +6,7 @@ from discord.ext import commands
 
 dotenv.load_dotenv()
 
-bot = commands.Bot(command_prefix=["39love#", "39❤️#", "h.yummy#"])
+bot = commands.Bot(command_prefix=["39love#", "lenlove#", "h.yummy#"])
 
 
 @bot.command()
