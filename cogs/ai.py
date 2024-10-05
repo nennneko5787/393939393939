@@ -11,6 +11,8 @@ class AIChatCog(commands.Cog):
         
     @commands.command()
     async def aichat(self, ctx: commands.Context, *, prompt: str):
+        if ctx.author.id != 1048448686914551879:
+            return
         message = await ctx.reply("生成中")
         try:
             stream = await self.client.chat.completions.create(
