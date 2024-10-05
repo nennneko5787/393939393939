@@ -1,3 +1,4 @@
+
 import asyncio
 
 import discord
@@ -8,20 +9,25 @@ class AIChatCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
         self.client = AsyncOpenAI(base_url="https://api.voids.top/v1", api_key="39")
+        self.talkHistory: dict<int, list<dict<str, str>>> = {}
         
     @commands.command()
     async def aichat(self, ctx: commands.Context, *, prompt: str):
         if ctx.author.id != 1048448686914551879:
             return
+        if not ctx.author.id in self.talkHistory:
+            self.talkHistory[ctx.author.id] = []
+            
+        self.talkHistory[ctx.author.id].append(
+            {
+                "role": "user",
+                "content": prompt,
+            }
+        )
         message = await ctx.reply("生成中")
         try:
             stream = await self.client.chat.completions.create(
-                messages=[
-                    {
-                        "role": "user",
-                        "content": prompt,
-                    }
-                ],
+                messages=self.talkHistory[ctx.author.id],
                 model="gemini-1.5-pro-exp-0827",
                 stream=True,
             )
