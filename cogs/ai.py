@@ -12,7 +12,12 @@ class AIChatCog(commands.Cog):
         self.talkHistory: dict = {}
         
     @commands.command()
-    async def aichat(self, ctx: commands.Context, *, prompt: str):
+    async def aiclear(self, ctx: commands.Context):
+        self.talkHistory[ctx.author.id] = []
+        await ctx.reply("ok")
+        
+    @commands.command()
+    async def ai(self, ctx: commands.Context, *, prompt: str):
         if ctx.author.id != 1048448686914551879:
             return
         if not ctx.author.id in self.talkHistory:
@@ -38,7 +43,7 @@ class AIChatCog(commands.Cog):
                     message = await message.edit(content)
                 except:
                     pass
-                await asyncio.sleep(0.3)
+                await asyncio.sleep(0.8)
             self.talkHistory[ctx.author.id].append(
                 {
                     "role": "system",
