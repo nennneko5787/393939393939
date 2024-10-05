@@ -5,7 +5,7 @@ from openai import AsyncOpenAI
 class AIChatCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
-        self.client = AsyncOpenAI(base_url="https://api.voids.top/v1")
+        self.client = AsyncOpenAI(base_url="https://api.voids.top/v1", api_key="")
         
     @commands.command()
     async def aichat(ctx: commands.Context, prompt: str):
