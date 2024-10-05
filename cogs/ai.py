@@ -8,7 +8,7 @@ class AIChatCog(commands.Cog):
         self.client = AsyncOpenAI(base_url="https://api.voids.top/v1", api_key="")
         
     @commands.command()
-    async def aichat(ctx: commands.Context, prompt: str):
+    async def aichat(self, ctx: commands.Context, prompt: str):
         message = await ctx.reply("生成中")
         chat_completion = await client.chat.completions.create(
             messages=[
