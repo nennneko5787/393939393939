@@ -14,7 +14,7 @@ async def setup_hook():
 
 @bot.command()
 async def delete(ctx: commands.Context, msgId: int):
-    await ctx.channel.get_message(msgId).delete()
+    await (await ctx.channel.fetch_message(msgId)).delete()
     await ctx.reply("success")
 
 @bot.command()
