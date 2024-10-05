@@ -39,6 +39,11 @@ class AIChatCog(commands.Cog):
                 except:
                     pass
                 await asyncio.sleep(0.3)
+            self.talkHistory[ctx.author.id].append(
+                {
+                    "role": "system",
+                    "content": content,
+            )
         except Exception as e:
             await message.edit(str(e))
             
