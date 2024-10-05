@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from openai import AsyncClient
+from openai import AsyncOpenAI
 
 class AIChatCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
