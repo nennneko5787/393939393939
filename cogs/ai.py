@@ -21,7 +21,7 @@ class AIChatCog(commands.Cog):
             stream=True,
         )
         async for chunk in stream:
-            await message.edit(chunk.choices[0].delta.content or "生成中")
+            message = await message.edit(message.content + chunk.choices[0].delta.content or "生成中")
             
 async def setup(bot: commands.Bot):
     await bot.add_cog(AIChatCog(bot))
